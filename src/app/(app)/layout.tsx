@@ -10,7 +10,7 @@ type Props = {
 const AppLayout = ({ children }: Props) => {
   return (
     <RedirectIfNotAuthenticated>
-        <main>{children}</main>
+      <main>{children}</main>
     </RedirectIfNotAuthenticated>
   );
 };

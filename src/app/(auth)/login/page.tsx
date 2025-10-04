@@ -40,7 +40,7 @@ const LoginPage = () => {
         }}
       >
         <h2 className="text-lg text-center font-medium text-neutral-900">
-          E-Commerce Admin
+          Login
         </h2>
         <Input
           name="email"
@@ -55,27 +55,43 @@ const LoginPage = () => {
           errorMessage={errorFields.email}
         />
 
-        <div><PasswordInput
-          name="password"
-          placeholder="Input password"
-          value={formState.password}
-          onChange={(e) =>
-            setFormState((st) => ({
-              ...st,
-              password: e.target.value,
-            }))
-          }
-          errorMessage={errorFields.password}
-        /><div className="flex flex-row justify-between text-sm text-blue-500 mt-2 cursor-pointer text-sm" onClick={() => {
-          router.replace("/forgot-password");
-        }}>Forget Password?</div>
+        <div>
+          <PasswordInput
+            name="password"
+            placeholder="Input password"
+            value={formState.password}
+            onChange={(e) =>
+              setFormState((st) => ({
+                ...st,
+                password: e.target.value,
+              }))
+            }
+            errorMessage={errorFields.password}
+          />
+          <div
+            className="flex flex-row justify-between text-sm text-blue-500 mt-2 cursor-pointer text-sm"
+            onClick={() => {
+              router.replace("/forgot-password");
+            }}
+          >
+            Forgot Password?
+          </div>
         </div>
-        
-        
+
         <Button className="mt-2" type="submit">
           Login
         </Button>
-        <div className="flex flex-row justify-between text-sm">Don’t have an account? <span onClick={() => {router.replace("/register");}} className="text-blue-500 cursor-pointer">Register</span></div>
+        <div className="flex flex-row justify-between text-sm">
+          Don’t have an account?{" "}
+          <span
+            onClick={() => {
+              router.replace("/register");
+            }}
+            className="text-blue-500 cursor-pointer"
+          >
+            Register
+          </span>
+        </div>
       </form>
     </div>
   );

@@ -7,4 +7,4 @@ export type User = {
   balance: number;
   createdAt: Date;
   updatedAt: Date;
-}
+};

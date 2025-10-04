@@ -2,7 +2,7 @@
 
 import { forgotPassword } from "@/actions/forgot-password";
 import { Button } from "@/components/ui/button";
-import { Input} from "@/components/ui/input";
+import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -24,7 +24,7 @@ const LoginPage = () => {
             data: user,
             error,
             errorFields,
-          } = await forgotPassword({data: formState});
+          } = await forgotPassword({ data: formState });
 
           if (errorFields !== null) {
             setErrorFields(errorFields);
@@ -36,7 +36,7 @@ const LoginPage = () => {
         }}
       >
         <h2 className="text-lg text-center font-medium text-neutral-900">
-          E-Commerce User
+          Forgot Password
         </h2>
         <Input
           name="email"
@@ -48,8 +48,8 @@ const LoginPage = () => {
             }))
           }
           errorMessage={errorFields.email}
-        />      
-        
+        />
+
         <Button className="mt-2" type="submit">
           Send OTP
         </Button>

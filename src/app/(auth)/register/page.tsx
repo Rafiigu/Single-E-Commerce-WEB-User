@@ -43,7 +43,7 @@ const RegisterPage = () => {
         }}
       >
         <h2 className="text-lg text-center font-medium text-neutral-900">
-          E-Commerce User
+          Register
         </h2>
 
         <Input
@@ -84,12 +84,21 @@ const RegisterPage = () => {
           }
           errorMessage={errorFields.password}
         />
-        
-        
+
         <Button className="mt-2" type="submit">
           Register
         </Button>
-        <div className="flex flex-row justify-between text-sm">Already have an account? <span onClick={() => {router.replace("/login");}} className="text-blue-500 cursor-pointer">Login</span></div>
+        <div className="flex flex-row justify-between text-sm">
+          Already have an account?{" "}
+          <span
+            onClick={() => {
+              router.replace("/login");
+            }}
+            className="text-blue-500 cursor-pointer"
+          >
+            Login
+          </span>
+        </div>
       </form>
     </div>
   );

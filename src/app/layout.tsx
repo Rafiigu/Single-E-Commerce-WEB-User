@@ -19,15 +19,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-  const {data, error} = await getAuthenticatedUser();
+  const { data, error } = await getAuthenticatedUser();
 
   const user = data && error === null ? data : null;
   return (
     <html lang="en">
-      <body
-        className={`${interSans.className} antialiased`}
-      >
+      <body className={`${interSans.className} antialiased`}>
         <AuthProvider user={user}>{children}</AuthProvider>
         <Toaster />
       </body>
