@@ -69,7 +69,7 @@ const LoginPage = () => {
             errorMessage={errorFields.password}
           />
           <div
-            className="flex flex-row justify-between text-sm text-blue-500 mt-2 cursor-pointer text-sm"
+            className="flex flex-row justify-between text-sm text-blue-500 mt-2 cursor-pointer"
             onClick={() => {
               router.replace("/forgot-password");
             }}
