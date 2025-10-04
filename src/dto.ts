@@ -17,3 +17,8 @@ export type UpdatePasswordDTO = {
   currentPassword: string;
   newPassword: string;
 };
+
+export type VerifyDTO = {
+  email: string;
+  token: string;
+};

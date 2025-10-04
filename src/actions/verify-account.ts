@@ -1,13 +1,13 @@
 "use server";
 
-import { ForgetPasswordDTO } from "@/dto";
+import { VerifyDTO } from "@/dto";
 import { constructEndpoint } from "@/lib/api";
 import { User } from "@/types";
 
-export const forgotPassword = async ({ data }: { data: ForgetPasswordDTO }) => {
+export const verifyAccount = async ({ data }: { data: VerifyDTO }) => {
   try {
     const fetchResponse = await fetch(
-      constructEndpoint("auth/user/forgot-password"),
+      constructEndpoint("auth/user/verify-account"),
       {
         method: "POST",
         body: JSON.stringify(data),
