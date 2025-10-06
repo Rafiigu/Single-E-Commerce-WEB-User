@@ -38,7 +38,7 @@ const RegisterPage = () => {
             toast.error(error);
           } else {
             toast.success("Registrasi berhasil!");
-            router.replace("/login");
+            router.replace("/verify-account/link-sent");
             // TODO: Redirect ke satu halaman, isinya teks doang
             // kata"nya "Link verifikasi akun telah dikirimkan pada email yang digunakan untuk registrasi."
           }

@@ -22,3 +22,9 @@ export type VerifyDTO = {
   email: string;
   token: string;
 };
+
+export type ResetPasswordDTO = {
+  email: string;
+  token: string;
+  newPassword: string;
+};

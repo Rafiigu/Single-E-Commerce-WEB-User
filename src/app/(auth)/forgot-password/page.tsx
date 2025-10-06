@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
-const LoginPage = () => {
+const ForgotPasswordPage = () => {
   const router = useRouter();
 
   const [formState, setFormState] = useState({
@@ -31,7 +31,7 @@ const LoginPage = () => {
           } else if (error !== null) {
             toast.error(error);
           } else {
-            toast.success("Kode OTP telah dikirim ke email Anda!");
+            toast.success("Link OTP telah dikirim ke email Anda!");
           }
         }}
       >
@@ -58,4 +58,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default ForgotPasswordPage;
