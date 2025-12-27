@@ -1,15 +1,9 @@
-"use client";
+import { listProducts } from "@/actions/list-product";
+import ProductPageClient from "@/components/product/product-page-client";
 
-import { useAuth } from "@/components/providers/auth-provider";
-
-const HomePage = () => {
-  const { user } = useAuth();
-
-  return (
-    <div className="flex flex-row items-center justify-center h-[100vh]">
-      <div>Hello, {user?.name}</div>
-    </div>
-  );
+const HomePage = async () => {
+  const products = await listProducts();
+  return <ProductPageClient products={products} />;
 };
 
 export default HomePage;
