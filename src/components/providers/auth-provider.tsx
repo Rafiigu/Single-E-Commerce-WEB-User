@@ -4,21 +4,23 @@ import { User } from "@/types";
 import { createContext, ReactNode, useContext } from "react";
 
 type AuthContextType = {
-    user: User | null;
+  user: User | null;
 };
 
 const AuthContext = createContext<AuthContextType>({
-    user: null,
-})
+  user: null,
+});
 
 export const AuthProvider = ({
-    user,
-    children,
+  user,
+  children,
 }: {
-    user: User | null,
-    children: ReactNode,
-}) => { return (
-    <AuthContext.Provider value={{user}}>{children}</AuthContext.Provider>)
-}
+  user: User | null;
+  children: ReactNode;
+}) => {
+  return (
+    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
+  );
+};
 
 export const useAuth = () => useContext(AuthContext);

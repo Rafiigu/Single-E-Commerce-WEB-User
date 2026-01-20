@@ -11,14 +11,14 @@ export const listProducts = async () => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
           (await cookies()).get("AUTH_TOKEN")?.value || ""
-        }`,
+        }`, // emg harus login??
       },
     });
 
     const response = await fetchResponse.json();
     if (!fetchResponse.ok) {
       return {
-        data: [],
+        data: [] as Product[],
         total: 0,
         error: response.error.message || null,
       };
@@ -31,7 +31,7 @@ export const listProducts = async () => {
     };
   } catch (error) {
     return {
-      data: [],
+      data: [] as Product[],
       total: 0,
       error: (error as Error).message || null,
     };
