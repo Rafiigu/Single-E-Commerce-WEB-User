@@ -4,6 +4,7 @@ import { Header } from "@/components/shared/header";
 
 const HomePage = async () => {
   const { data: products, error } = await listProducts();
+  console.log("Products:", products);
   if (error) {
     throw new Error(error);
   }

@@ -4,10 +4,10 @@ import { constructEndpoint } from "@/lib/api";
 import { Wishlist } from "@/types";
 import { cookies } from "next/headers";
 
-export const createWishlist = async ({ productId }: { productId: string }) => {
+export const deleteWishlist = async ({ productId }: { productId: string }) => {
   try {
     const fetchResponse = await fetch(
-      constructEndpoint(`wishlist/${productId}`),
+      constructEndpoint(`unwishlist/${productId}`),
       {
         method: "POST",
         headers: {
@@ -26,10 +26,11 @@ export const createWishlist = async ({ productId }: { productId: string }) => {
       };
     }
 
+    console.log(response);
+
     return {
-      data: response.data as Wishlist,
+      data: response,
       error: null,
-      errorFields: null,
     };
   } catch (error) {
     return {

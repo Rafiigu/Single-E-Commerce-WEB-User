@@ -6,7 +6,6 @@ import { User } from "@/types";
 
 export const register = async ({ data }: { data: RegisterDTO }) => {
   try {
-    console.log(data);
     const fetchResponse = await fetch(constructEndpoint("auth/user/register"), {
       method: "POST",
       body: JSON.stringify(data),

@@ -30,8 +30,6 @@ const RegisterPage = () => {
             data: formState,
           });
 
-          console.log("test");
-
           if (errorFields !== null) {
             setErrorFields(errorFields);
           } else if (error !== null) {
