@@ -10,7 +10,7 @@ export const Header = () => {
   const { user } = useAuth();
 
   return (
-    <header className="flex justify-between w-full border-b border-b-neutral-100">
+    <header className="flex justify-around w-full border-b border-b-neutral-100">
       <div className="flex justify-between items-center w-full h-24 px-4 max-w-[1440px]">
         <h2>E Commerce</h2>
         {user ? (
@@ -19,6 +19,9 @@ export const Header = () => {
             <Button
               onClick={async () => {
                 await logout();
+                // router.replace("/");
+                // router.refresh();
+                // location.reload();
               }}
               variant={"outline"}
             >

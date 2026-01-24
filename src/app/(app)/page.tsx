@@ -1,10 +1,11 @@
 import { listProducts } from "@/actions/list-product";
 import { ProductCard } from "@/components/product/card";
 import { Header } from "@/components/shared/header";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 const HomePage = async () => {
   const { data: products, error } = await listProducts();
-  console.log("Products:", products);
   if (error) {
     throw new Error(error);
   }

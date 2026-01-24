@@ -6,14 +6,16 @@ import { cookies } from "next/headers";
 
 export const listProducts = async () => {
   try {
-    const fetchResponse = await fetch(constructEndpoint("product"), {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${
-          (await cookies()).get("AUTH_TOKEN")?.value || ""
-        }`, // emg harus login??
+    const fetchResponse = await fetch(
+      constructEndpoint("product", {
+        includeWishlist: (await cookies()).get("AUTH_TOKEN")?.value ? 1 : 0,
+      }),
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
       },
-    });
+    );
 
     const response = await fetchResponse.json();
     if (!fetchResponse.ok) {

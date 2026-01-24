@@ -22,6 +22,7 @@ export type Product = {
   category: Pick<Category, "id" | "name">;
   createdAt: string;
   updatedAt: string;
+  wishlists: Pick<Wishlist, "productId" | "userId">[];
 };
 
 export type Category = {
