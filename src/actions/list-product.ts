@@ -5,6 +5,7 @@ import { Product } from "@/types";
 import { cookies } from "next/headers";
 
 export const listProducts = async () => {
+  console.log((await cookies()).get("AUTH_TOKEN")?.value);
   try {
     const fetchResponse = await fetch(
       constructEndpoint("product", {

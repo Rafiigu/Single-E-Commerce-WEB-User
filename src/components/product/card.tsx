@@ -5,7 +5,7 @@ import { deleteWishlist } from "@/actions/wishlist/delete";
 import { getProxiedDownloadUrl } from "@/lib/download/get-proxied-download-url";
 import { Product } from "@/types";
 import { format } from "date-fns";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../providers/auth-provider";
 import { useRouter } from "next/navigation";
 import { Star } from "lucide-react";
@@ -17,17 +17,22 @@ type Props = {
 
 export const ProductCard = ({ product }: Props) => {
   const { user } = useAuth();
-  const isWishlisted = product.wishlists?.map((wishlist) => {
-    if (wishlist.userId === user?.id) {
-      return true;
-    } else {
-      return false;
-    }
-  });
-  console.log("Is wishlisted:", isWishlisted);
   const [isWishlist, setIsWishlist] = useState(
-    isWishlisted?.includes(true) || false,
+    product.wishlists
+      ? product.wishlists.find((wishlist) => wishlist.userId === user?.id) !==
+          null
+      : false,
   );
+
+  useEffect(() => {
+    setIsWishlist(
+      product.wishlists
+        ? product.wishlists.find((wishlist) => wishlist.userId === user?.id) !==
+            null
+        : false,
+    );
+  }, [product.wishlists, user]);
+
   const router = useRouter();
   const formatter = new Intl.NumberFormat("id-ID", {
     style: "currency",
@@ -52,15 +57,19 @@ export const ProductCard = ({ product }: Props) => {
   return (
     <div
       key={product.id}
-      className="mb-4 p-4 border rounded w-[80%] flex gap-x-6"
+      className="mb-4 p-4 border rounded w-full flex gap-x-6"
     >
       <div>
-        <img
-          className="w-35 h-35 mb-4 rounded"
-          src={getProxiedDownloadUrl(
-            `/product/file/${product.productImages[0].imageFileName}`,
-          )}
-        />
+        {product.productImages && product.productImages.length > 0 ? (
+          <img
+            className="w-35 h-35 rounded"
+            src={getProxiedDownloadUrl(
+              `/product/file/${product.productImages[0].imageFileName}`,
+            )}
+          />
+        ) : (
+          <div className="w-35 h-35 rounded bg-neutral-200"></div>
+        )}
       </div>
       <div className="flex flex-col w-full gap-y-1">
         <div className="flex justify-between w-full">

@@ -1,8 +1,6 @@
 import { listProducts } from "@/actions/list-product";
 import { ProductCard } from "@/components/product/card";
 import { Header } from "@/components/shared/header";
-import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 
 const HomePage = async () => {
   const { data: products, error } = await listProducts();
@@ -10,10 +8,12 @@ const HomePage = async () => {
     throw new Error(error);
   }
 
+  console.log("EXECUTED");
+
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col items-center w-full">
       <Header />
-      <main className="flex flex-col items-center w-full max-w-[1440px]">
+      <main className="flex flex-col items-center w-full px-4 max-w-[1440px] mt-4">
         {products.map((product, i) => (
           <ProductCard
             key={`#product-card-${product.id}-${i}`}
