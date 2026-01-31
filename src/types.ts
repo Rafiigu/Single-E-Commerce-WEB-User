@@ -40,3 +40,13 @@ export type Wishlist = {
   updatedAt: string;
   userId: string;
 };
+
+export type CartItem = {
+  id: string;
+  userId: string;
+  productId: string;
+  quantity: number;
+  createdAt: string;
+  updatedAt: string;
+  product: Pick<Product, "id" | "name" | "price" | "productImages">;
+};

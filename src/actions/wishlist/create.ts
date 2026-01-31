@@ -9,7 +9,7 @@ export const createWishlist = async ({ productId }: { productId: string }) => {
     const fetchResponse = await fetch(
       constructEndpoint(`wishlist/${productId}`),
       {
-        method: "POST",
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${

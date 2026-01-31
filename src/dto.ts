@@ -28,3 +28,8 @@ export type ResetPasswordDTO = {
   token: string;
   newPassword: string;
 };
+
+export type cartItemDTO = {
+  productId: string;
+  quantity: number;
+};

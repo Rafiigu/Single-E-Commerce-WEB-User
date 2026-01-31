@@ -8,8 +8,7 @@ const HomePage = async () => {
     throw new Error(error);
   }
 
-  console.log("EXECUTED");
-
+  console.log("HomePage - Products:", products);
   return (
     <div className="flex flex-col items-center w-full">
       <Header />

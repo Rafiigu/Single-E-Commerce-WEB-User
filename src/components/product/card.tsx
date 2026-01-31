@@ -8,8 +8,11 @@ import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import { useAuth } from "../providers/auth-provider";
 import { useRouter } from "next/navigation";
-import { Star } from "lucide-react";
+import { ShoppingCart, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Button } from "../ui/button";
+import { useCart } from "../providers/cart-provider";
+import { createCartItem } from "@/actions/cart/create";
 
 type Props = {
   product: Product;
@@ -17,8 +20,9 @@ type Props = {
 
 export const ProductCard = ({ product }: Props) => {
   const { user } = useAuth();
+  const { increment } = useCart();
   const [isWishlist, setIsWishlist] = useState(
-    product.wishlists
+    product.wishlists && product.wishlists.length > 0
       ? product.wishlists.find((wishlist) => wishlist.userId === user?.id) !==
           null
       : false,
@@ -26,7 +30,7 @@ export const ProductCard = ({ product }: Props) => {
 
   useEffect(() => {
     setIsWishlist(
-      product.wishlists
+      product.wishlists && product.wishlists.length > 0
         ? product.wishlists.find((wishlist) => wishlist.userId === user?.id) !==
             null
         : false,
@@ -92,9 +96,21 @@ export const ProductCard = ({ product }: Props) => {
         <p className="font-semibold text-base mb-7">
           {formatter.format(product.price).replace(/^Rp\s?/, "Rp")}
         </p>
-        <p className="text-sm text-muted-foreground">
-          {format(new Date(product.updatedAt), "MM/dd/yyyy")}
-        </p>
+        <div className="flex justify-between">
+          <p className="text-sm text-muted-foreground">
+            {format(new Date(product.updatedAt), "MM/dd/yyyy")}
+          </p>
+          <Button
+            onClick={() => {
+              increment(product.id);
+              createCartItem({ data: { productId: product.id, quantity: 1 } });
+            }}
+            size={"sm"}
+          >
+            <ShoppingCart className="w-4 h-4 mr-2" />
+            Add to Cart
+          </Button>
+        </div>
       </div>
     </div>
   );

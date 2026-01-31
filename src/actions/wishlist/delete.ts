@@ -1,7 +1,6 @@
 "use server";
 
 import { constructEndpoint } from "@/lib/api";
-import { Wishlist } from "@/types";
 import { cookies } from "next/headers";
 
 export const deleteWishlist = async ({ productId }: { productId: string }) => {
@@ -9,7 +8,7 @@ export const deleteWishlist = async ({ productId }: { productId: string }) => {
     const fetchResponse = await fetch(
       constructEndpoint(`unwishlist/${productId}`),
       {
-        method: "POST",
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${
