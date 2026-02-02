@@ -29,7 +29,8 @@ export type ResetPasswordDTO = {
   newPassword: string;
 };
 
-export type cartItemDTO = {
+export type CartItemDTO = {
   productId: string;
-  quantity: number;
+  quantity?: number;
+  removeQuantity?: number;
 };

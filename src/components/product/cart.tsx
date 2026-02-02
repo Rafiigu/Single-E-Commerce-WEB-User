@@ -13,9 +13,10 @@ import {
 import { useEffect, useState } from "react";
 import { listCartItems } from "@/actions/cart/list-cart";
 import { CartItem } from "@/types";
+import { CartItemCard } from "./cart-item";
 
 export const Cart = () => {
-  const { count } = useCart();
+  const { count, cart } = useCart();
   const [open, setOpen] = useState(false);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   useEffect(() => {
@@ -27,7 +28,7 @@ export const Cart = () => {
     };
 
     fetchAsync();
-  }, [open]);
+  }, [open, cart]);
 
   return (
     <div>
@@ -36,14 +37,18 @@ export const Cart = () => {
           <div className="cursor-pointer">
             <ShoppingCart />
             {count > 0 && (
-              <span className="absolute -top-2 -right-3 bg-red-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-xs">
+              <span className="absolute -top-3 -right-3 bg-red-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-xs">
                 {count}
               </span>
             )}
           </div>
         </PopoverTrigger>
-        <PopoverContent className="position: absolute top-6 -right-30 w-80 h-95">
-          <div>Test</div>
+        <PopoverContent className="position: absolute top-6 -right-30 w-130 h-85 overflow-y-auto">
+          <div className="flex flex-col gap-y-2">
+            {cartItems.map((item) => (
+              <CartItemCard key={item.id} cartItem={item} />
+            ))}
+          </div>
         </PopoverContent>
       </Popover>
     </div>

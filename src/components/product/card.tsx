@@ -20,7 +20,7 @@ type Props = {
 
 export const ProductCard = ({ product }: Props) => {
   const { user } = useAuth();
-  const { increment } = useCart();
+  const { addToCart } = useCart();
   const [isWishlist, setIsWishlist] = useState(
     product.wishlists && product.wishlists.length > 0
       ? product.wishlists.find((wishlist) => wishlist.userId === user?.id) !==
@@ -100,16 +100,22 @@ export const ProductCard = ({ product }: Props) => {
           <p className="text-sm text-muted-foreground">
             {format(new Date(product.updatedAt), "MM/dd/yyyy")}
           </p>
-          <Button
-            onClick={() => {
-              increment(product.id);
-              createCartItem({ data: { productId: product.id, quantity: 1 } });
-            }}
-            size={"sm"}
-          >
-            <ShoppingCart className="w-4 h-4 mr-2" />
-            Add to Cart
-          </Button>
+          {user ? (
+            <Button
+              onClick={() => {
+                addToCart(product.id);
+                createCartItem({
+                  data: { productId: product.id, quantity: 1 },
+                });
+              }}
+              size={"sm"}
+            >
+              <ShoppingCart className="w-4 h-4 mr-2" />
+              <p>Add to Cart</p>
+            </Button>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </div>

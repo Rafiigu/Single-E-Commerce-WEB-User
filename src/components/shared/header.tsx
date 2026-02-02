@@ -22,7 +22,7 @@ export const Header = () => {
         {user ? (
           <div className="flex gap-x-5 items-center">
             <h3>Hello, {user.name}</h3>
-            <div>
+            <div className="relative">
               <Cart />
             </div>
             <Button
