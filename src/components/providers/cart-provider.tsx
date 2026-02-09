@@ -9,9 +9,9 @@ type CartContextType = {
   cart: CartMap;
   count: number;
   addToCart: (productId: string) => void;
-  subtractFromCart: (productId: string) => void;
+  removeFromCart: (productId: string) => void;
+  removeAllFromCart: (productId: string) => void;
   getProductCount: (productId: string) => number;
-  setCart: React.Dispatch<React.SetStateAction<CartMap>>;
 };
 
 type Props = {
@@ -23,9 +23,9 @@ const CartContext = createContext<CartContextType>({
   cart: {},
   count: 0,
   addToCart: () => {},
-  subtractFromCart: () => {},
+  removeFromCart: () => {},
+  removeAllFromCart: () => {},
   getProductCount: () => 0,
-  setCart: () => {},
 });
 
 export const CartProvider = ({ cartItems, children }: Props) => {
@@ -52,7 +52,7 @@ export const CartProvider = ({ cartItems, children }: Props) => {
     }));
   };
 
-  const subtractFromCart = (productId: string) => {
+  const removeFromCart = (productId: string) => {
     setCart((prev) => {
       const current = prev[productId] || 0;
       if (current <= 1) {
@@ -66,6 +66,13 @@ export const CartProvider = ({ cartItems, children }: Props) => {
     });
   };
 
+  const removeAllFromCart = (productId: string) => {
+    setCart((prev) => {
+      const { [productId]: _, ...rest } = prev;
+      return rest;
+    });
+  };
+
   const getProductCount = (productId: string): number => {
     return cart[productId] || 0;
   };
@@ -76,9 +83,9 @@ export const CartProvider = ({ cartItems, children }: Props) => {
         cart,
         count,
         addToCart,
-        subtractFromCart,
+        removeFromCart,
+        removeAllFromCart,
         getProductCount,
-        setCart,
       }}
     >
       {children}

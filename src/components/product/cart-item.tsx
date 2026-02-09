@@ -12,7 +12,7 @@ type Props = {
 };
 
 export const CartItemCard = ({ cartItem }: Props) => {
-  const { addToCart, subtractFromCart, setCart } = useCart();
+  const { addToCart, removeFromCart, removeAllFromCart } = useCart();
 
   const formatter = new Intl.NumberFormat("id-ID", {
     style: "currency",
@@ -35,7 +35,7 @@ export const CartItemCard = ({ cartItem }: Props) => {
           <Button
             className="ml-2 h-8 w-8"
             onClick={() => {
-              subtractFromCart(cartItem.product.id);
+              removeFromCart(cartItem.product.id);
               createCartItem({
                 data: { productId: cartItem.product.id, removeQuantity: 1 },
               });
@@ -68,11 +68,8 @@ export const CartItemCard = ({ cartItem }: Props) => {
       </div>
       <button
         onClick={() => {
+          removeAllFromCart(cartItem.product.id);
           deleteCartItem({ cartItemId: cartItem.id });
-          setCart((prev) => {
-            const { [cartItem.product.id]: _, ...rest } = prev;
-            return rest;
-          });
         }}
         className="ml-auto text-gray-500 font-bold top-2 right-2 absolute cursor-pointer"
       >

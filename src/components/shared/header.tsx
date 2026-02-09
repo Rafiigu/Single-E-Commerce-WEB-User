@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "../providers/auth-provider";
 import { Button } from "../ui/button";
 import { logout } from "@/actions/logout";
-import { ShoppingCart } from "lucide-react";
 import { useCart } from "../providers/cart-provider";
 import { Cart } from "../product/cart";
 
