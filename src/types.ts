@@ -50,3 +50,32 @@ export type CartItem = {
   updatedAt: string;
   product: Pick<Product, "id" | "name" | "price" | "productImages">;
 };
+
+export type TopUp = {
+  id: string;
+  nominal: number;
+  paymentTermId: string;
+  paymentAccountId: string;
+  createdAt: string;
+  updatedAt: string;
+  status: string;
+};
+
+export type PaymentAccount = {
+  id: string;
+  paymentTerm: Pick<PaymentTerm, "id" | "name">;
+  accountHolderName: string;
+  accountNumber: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type PaymentTerm = {
+  id: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+  status: string;
+  paymentAccounts: Pick<PaymentAccount, "id" | "accountNumber" | "accountHolderName">[];
+};

@@ -1,21 +1,21 @@
 "use server";
 
-import { CartItemDTO } from "@/dto";
+import { TopUpDTO } from "@/dto";
 import { constructEndpoint } from "@/lib/api";
-import { CartItem } from "@/types";
+import { TopUp } from "@/types";
 import { cookies } from "next/headers";
 
-export const createCartItem = async ({ data }: { data: CartItemDTO }) => {
+export const createTopUp = async ({ data }: { data: TopUpDTO }) => {
   try {
-    const fetchResponse = await fetch(constructEndpoint(`cart`), {
+    const fetchResponse = await fetch(constructEndpoint(`top-up`), {
       method: "POST",
-      body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
           (await cookies()).get("AUTH_TOKEN")?.value || ""
         }`,
       },
+      body: JSON.stringify(data),
     });
     const response = await fetchResponse.json();
     if (!fetchResponse.ok) {
@@ -26,7 +26,7 @@ export const createCartItem = async ({ data }: { data: CartItemDTO }) => {
     }
 
     return {
-      data: response.data as CartItem,
+      data: response.data as TopUp,
       error: null,
       errorFields: null,
     };

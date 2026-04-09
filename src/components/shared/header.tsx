@@ -14,6 +14,8 @@ export const Header = () => {
   const { count } = useCart();
   console.log("Header - Cart Count:", count);
 
+  const userBalance = user?.balance || 0;
+
   return (
     <header className="bg-white sticky top-0 flex justify-around w-full border-b border-b-neutral-100">
       <div className="flex justify-between items-center w-full h-16 px-4 max-w-[1440px]">
@@ -21,6 +23,19 @@ export const Header = () => {
         {user ? (
           <div className="flex gap-x-5 items-center">
             <h3>Hello, {user.name}</h3>
+            <Button
+              onClick={() => {
+                router.push("/top-up");
+              }}
+              variant={"outline"}
+            >
+              Balance:{" "}
+              {userBalance.toLocaleString("id-ID", {
+                style: "currency",
+                currency: "IDR",
+                minimumFractionDigits: 2,
+              })}
+            </Button>
             <div className="relative">
               <Cart />
             </div>

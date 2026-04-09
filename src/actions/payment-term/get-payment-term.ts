@@ -1,15 +1,12 @@
 "use server";
 
-import { CartItemDTO } from "@/dto";
 import { constructEndpoint } from "@/lib/api";
-import { CartItem } from "@/types";
+import { PaymentTerm } from "@/types";
 import { cookies } from "next/headers";
 
-export const createCartItem = async ({ data }: { data: CartItemDTO }) => {
+export const getPaymentTerm = async ({ id }: { id: string }) => {
   try {
-    const fetchResponse = await fetch(constructEndpoint(`cart`), {
-      method: "POST",
-      body: JSON.stringify(data),
+    const fetchResponse = await fetch(constructEndpoint(`payment-term/${id}`), {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
@@ -26,7 +23,8 @@ export const createCartItem = async ({ data }: { data: CartItemDTO }) => {
     }
 
     return {
-      data: response.data as CartItem,
+      data: response.data as PaymentTerm,
+      total: response.total,
       error: null,
       errorFields: null,
     };

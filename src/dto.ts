@@ -34,3 +34,9 @@ export type CartItemDTO = {
   quantity?: number;
   removeQuantity?: number;
 };
+
+export type TopUpDTO = {
+  nominal: number;
+  paymentTermId: string;
+  paymentAccountId: string;
+};
