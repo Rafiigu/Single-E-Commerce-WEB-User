@@ -6,6 +6,15 @@ import { Button } from "../ui/button";
 import { logout } from "@/actions/logout";
 import { useCart } from "../providers/cart-provider";
 import { Cart } from "../product/cart";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 
 export const Header = () => {
   const router = useRouter();
@@ -23,19 +32,37 @@ export const Header = () => {
         {user ? (
           <div className="flex gap-x-5 items-center">
             <h3>Hello, {user.name}</h3>
-            <Button
-              onClick={() => {
-                router.push("/top-up");
-              }}
-              variant={"outline"}
-            >
-              Balance:{" "}
-              {userBalance.toLocaleString("id-ID", {
-                style: "currency",
-                currency: "IDR",
-                minimumFractionDigits: 2,
-              })}
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" w-50>
+                  {" "}
+                  Balance:{" "}
+                  {userBalance.toLocaleString("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                    minimumFractionDigits: 2,
+                  })}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" side="bottom" className="w-46">
+                <DropdownMenuGroup>
+                  <DropdownMenuItem
+                    onClick={() => {
+                      router.push("/account/account");
+                    }}
+                  >
+                    Akun
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => {
+                      router.push("/account/top-up");
+                    }}
+                  >
+                    Tambah Saldo
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
             <div className="relative">
               <Cart />
             </div>

@@ -55,10 +55,20 @@ export type TopUp = {
   id: string;
   nominal: number;
   paymentTermId: string;
+  adminId?: string;
+  userId: string;
   paymentAccountId: string;
   createdAt: string;
   updatedAt: string;
   status: string;
+  paymentAccount: Pick<
+    PaymentAccount,
+    "id" | "accountNumber" | "accountHolderName"
+  > & {
+    paymentTerm: Pick<PaymentTerm, "id" | "name">;
+  };
+  user: Pick<User, | "name">;
+  admin?: "string";
 };
 
 export type PaymentAccount = {
@@ -77,5 +87,8 @@ export type PaymentTerm = {
   createdAt: string;
   updatedAt: string;
   status: string;
-  paymentAccounts: Pick<PaymentAccount, "id" | "accountNumber" | "accountHolderName">[];
+  paymentAccounts: Pick<
+    PaymentAccount,
+    "id" | "accountNumber" | "accountHolderName"
+  >[];
 };

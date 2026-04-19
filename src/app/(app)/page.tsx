@@ -1,4 +1,4 @@
-import { listProducts } from "@/actions/list-product";
+import { listProducts } from "@/actions/list-products";
 import { ProductCard } from "@/components/product/card";
 import { Header } from "@/components/shared/header";
 
