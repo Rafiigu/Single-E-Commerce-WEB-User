@@ -3,6 +3,7 @@
 import { TopUp } from "@/types";
 import { useAuth } from "../providers/auth-provider";
 import { useRouter } from "next/navigation";
+import { Badge, BadgeVariants } from "../ui/badge";
 
 type Props = {
   topUp: TopUp;
@@ -18,29 +19,49 @@ export const TopUpCard = ({ topUp }: Props) => {
     minimumFractionDigits: 2,
   });
 
+  const variantMap: Record<string, BadgeVariants> = {
+    approved: "success",
+    rejected: "danger",
+    cancelled: "warning",
+    requested: "default",
+    transferred: "info",
+  };
+
+  const valueMap: Record<string, string> = {
+    approved: "Approved",
+    rejected: "Rejected",
+    cancelled: "Cancelled",
+    requested: "Requested",
+    transferred: "Transferred",
+  };
+
   return (
-    <div key={topUp.id} className="mb-4">
-      <div className="mb-4 p-4 border rounded w-120 h-46 gap-x-6 bg-blue-300 flex flex-wrap">
-        <div className="flex flex-col w-full gap-y-1">
+    <div
+      key={topUp.id}
+      className="mb-4 cursor-pointer "
+      onClick={() => router.push(`/account/top-up-history/${topUp.id}`)}
+    >
+      <div className="mb-4 p-4 border rounded w-full h-22">
+        <div className="flex flex-col w-full gap-y-2">
           <div className="flex justify-between w-full">
-            <p className="line-clamp-2 text-shadow-black text-lg">
-              {formatter.format(topUp.nominal).replace(/^Rp\s?/, "Rp")}
-            </p>
-          </div>
-          <h3 className="text-md mb-1">
-            Nomor Rekening: {topUp.paymentAccount.accountNumber} (
-            {topUp.paymentAccount.accountHolderName})
-          </h3>
-          <h3>Metode Pembayaran: {topUp.paymentAccount.paymentTerm.name}</h3>
-          <h3>Status: {topUp.status}</h3>
-          <div className="flex justify-between">
-            <p className="text-sm">
+            <h3 className="line-clamp-2 text-shadow-black text-xs">
+              {topUp.id}
+            </h3>
+            <h3 className="text-sm">
               {new Date(topUp.createdAt).toLocaleDateString("id-ID", {
                 day: "2-digit",
                 month: "long",
                 year: "numeric",
               })}
-            </p>
+            </h3>
+          </div>
+          <div className="flex justify-between w-full">
+            <h3 className="text-lg mb-1">
+              {formatter.format(topUp.nominal).replace(/^Rp\s?/, "Rp")}
+            </h3>
+            <Badge variant={variantMap[topUp.status]}>
+              {valueMap[topUp.status]}
+            </Badge>
           </div>
         </div>
       </div>

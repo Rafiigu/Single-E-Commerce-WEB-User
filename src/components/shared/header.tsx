@@ -31,38 +31,26 @@ export const Header = () => {
         <h2>E Commerce</h2>
         {user ? (
           <div className="flex gap-x-5 items-center">
-            <h3>Hello, {user.name}</h3>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" w-50>
-                  {" "}
-                  Balance:{" "}
-                  {userBalance.toLocaleString("id-ID", {
-                    style: "currency",
-                    currency: "IDR",
-                    minimumFractionDigits: 2,
-                  })}
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="start" side="bottom" className="w-46">
-                <DropdownMenuGroup>
-                  <DropdownMenuItem
-                    onClick={() => {
-                      router.push("/account/account");
-                    }}
-                  >
-                    Akun
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    onClick={() => {
-                      router.push("/account/top-up");
-                    }}
-                  >
-                    Tambah Saldo
-                  </DropdownMenuItem>
-                </DropdownMenuGroup>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <Button
+              onClick={() => {
+                router.push("/account/me");
+              }}
+              variant={"outline"}
+            >
+              <h3>Hello, {user.name}</h3>
+            </Button>
+            <Button
+              variant="outline"
+              className="w-50"
+              onClick={() => router.push("/account/top-up-history")}
+            >
+              Balance:{" "}
+              {userBalance.toLocaleString("id-ID", {
+                style: "currency",
+                currency: "IDR",
+                minimumFractionDigits: 2,
+              })}
+            </Button>
             <div className="relative">
               <Cart />
             </div>
