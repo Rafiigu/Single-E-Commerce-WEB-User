@@ -5,9 +5,6 @@ import { useCart } from "../providers/cart-provider";
 import {
   Popover,
   PopoverContent,
-  PopoverDescription,
-  PopoverHeader,
-  PopoverTitle,
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useEffect, useState } from "react";

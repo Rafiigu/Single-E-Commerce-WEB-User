@@ -1,5 +1,6 @@
 "use client";
 import { useAuth } from "@/components/providers/auth-provider";
+import { Header } from "@/components/shared/header";
 
 const AccountPage = () => {
   const { user } = useAuth();
@@ -11,9 +12,9 @@ const AccountPage = () => {
   });
 
   return (
-    <div className="p-4 flex flex-col items-center gap-y-4 w-full">
-      <div className="border rounded w-1/2 h-34 p-4 flex">
-        <div className="w-24 h-24 rounded-full overflow-hidden flex items-center justify-center bg-blue-300">
+    <div className="flex flex-col items-center p-4 gap-y-4 w-full">
+      <div className="border rounded max-w-[1440px] h-34 p-4 flex">
+        <div className="w-24 h-24 max-sm:w-20 max-sm:h-20 rounded-full overflow-hidden flex items-center justify-center bg-blue-300">
           {user?.profile ? (
             <img
               src={user?.profile}

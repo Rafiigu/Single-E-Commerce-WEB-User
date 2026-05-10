@@ -61,20 +61,18 @@ export const ProductCard = ({ product }: Props) => {
   return (
     <div
       key={product.id}
-      className="mb-4 p-4 border rounded w-full flex gap-x-6"
+      className="mb-4 p-4 border rounded w-full items-center flex gap-x-6"
     >
-      <div>
-        {product.productImages && product.productImages.length > 0 ? (
-          <img
-            className="w-35 h-35 rounded"
-            src={getProxiedDownloadUrl(
-              `/product/file/${product.productImages[0].imageFileName}`,
-            )}
-          />
-        ) : (
-          <div className="w-35 h-35 rounded bg-neutral-200"></div>
-        )}
-      </div>
+      {product.productImages && product.productImages.length > 0 ? (
+        <img
+          className="w-35 h-35 rounded flex-shrink-0 object-cover"
+          src={getProxiedDownloadUrl(
+            `/product/file/${product.productImages[0].imageFileName}`,
+          )}
+        />
+      ) : (
+        <div className="w-35 h-35 rounded bg-neutral-200"></div>
+      )}
       <div className="flex flex-col w-full gap-y-1">
         <div className="flex justify-between w-full">
           <p className="line-clamp-2 text-shadow-black text-lg">
@@ -93,10 +91,10 @@ export const ProductCard = ({ product }: Props) => {
         <h3 className="text-md text-muted-foreground mb-1">
           {product.category.name}
         </h3>
-        <p className="font-semibold text-base mb-7">
+        <p className="font-semibold text-base mb-7 max-sm:mb-0">
           {formatter.format(product.price).replace(/^Rp\s?/, "Rp")}
         </p>
-        <div className="flex justify-between">
+        <div className="flex justify-between max-sm:flex-col max-sm:gap-y-2">
           <p className="text-sm text-muted-foreground">
             {format(new Date(product.updatedAt), "MM/dd/yyyy")}
           </p>
@@ -108,7 +106,6 @@ export const ProductCard = ({ product }: Props) => {
                   data: { productId: product.id, quantity: 1 },
                 });
               }}
-              size={"sm"}
             >
               <ShoppingCart className="w-4 h-4 mr-2" />
               <p>Add to Cart</p>
