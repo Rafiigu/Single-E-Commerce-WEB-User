@@ -42,12 +42,12 @@ export const TopUpCard = ({ topUp }: Props) => {
       onClick={() => router.push(`/account/top-up-history/${topUp.id}`)}
     >
       <div className="mb-4 p-4 border rounded w-full h-22">
-        <div className="flex flex-col w-full gap-y-2">
-          <div className="flex justify-between w-full">
+        <div className="flex flex-col w-full gap-y-2 max-sm:gap-y-0">
+          <div className="flex justify-between w-full items-center">
             <h3 className="line-clamp-2 text-shadow-black text-xs">
               {topUp.id}
             </h3>
-            <h3 className="text-sm">
+            <h3 className="text-xs text-right">
               {new Date(topUp.createdAt).toLocaleDateString("id-ID", {
                 day: "2-digit",
                 month: "long",
@@ -55,7 +55,7 @@ export const TopUpCard = ({ topUp }: Props) => {
               })}
             </h3>
           </div>
-          <div className="flex justify-between w-full">
+          <div className="flex justify-between w-full items-center">
             <h3 className="text-lg mb-1">
               {formatter.format(topUp.nominal).replace(/^Rp\s?/, "Rp")}
             </h3>

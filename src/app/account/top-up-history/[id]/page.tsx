@@ -35,8 +35,8 @@ export default async function TopUpDetailPage({
     transferred: "Transferred",
   };
   return (
-    <div className="flex justify-center w-full min-h-screen">
-      <div className="flex flex-col items-center p-5 max-w-120 min-w-screen h-[700px]">
+    <div className="flex justify-center w-full min-h-screen bg-gray-100">
+      <div className="flex flex-col items-center p-5 min-w-107 h-[700px] bg-white">
         <div className="w-full flex items-center">
           <ArrowBackButton />
           <h3 className="text-lg font-medium text-neutral-900">
@@ -46,11 +46,13 @@ export default async function TopUpDetailPage({
         <div className="w-full mt-10 flex flex-col gap-y-2">
           <div className="flex justify-between items-center">
             <h3 className="text-sm">Top Up ID</h3>
-            <h3 className="text-xs font-bold text-neutral-900">{topUp?.id}</h3>
+            <h3 className="text-xs font-bold text-neutral-900 text-right">
+              {topUp?.id}
+            </h3>
           </div>
           <div className="flex justify-between items-center">
             <h3 className="text-sm">Top Up Time</h3>
-            <h3 className="text-xs font-bold text-neutral-900">
+            <h3 className="text-xs font-bold text-neutral-900 text-right">
               {topUp && topUp?.createdAt
                 ? format(
                     new Date(topUp?.createdAt as string),
