@@ -17,6 +17,7 @@ import { TopUp } from "@/types";
 import { cancelTopUp } from "@/actions/top-up/cancel";
 
 export const CancelTopUpDialog = ({ topUp }: { topUp: TopUp }) => {
+  console.log(topUp);
   const [activeDialog, setActiveDialog] = useState<string | null>(null);
   const router = useRouter();
   return (

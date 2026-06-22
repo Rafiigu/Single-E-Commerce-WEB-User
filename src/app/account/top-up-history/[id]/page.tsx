@@ -1,6 +1,6 @@
 import { getTopUp } from "@/actions/top-up/get-top-up";
-import { ArrowBackButton } from "@/components/top-up-history.tsx/arrow-back-button";
-import { CancelTopUpDialog } from "@/components/top-up-history.tsx/dialog";
+import { ArrowBackButton } from "@/components/top-up-history/arrow-back-button";
+import { CancelTopUpDialog } from "@/components/top-up-history/dialog";
 import { Badge, BadgeVariants } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
