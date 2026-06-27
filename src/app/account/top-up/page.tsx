@@ -70,7 +70,7 @@ const TopUpPage = () => {
           } else {
             toast.success("Top up berhasil!");
             console.log(user);
-            // router.replace("/top-up/success");
+            router.replace("/account/top-up-history");
           }
         }}
       >
