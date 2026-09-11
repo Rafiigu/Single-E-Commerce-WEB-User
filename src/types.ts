@@ -48,7 +48,10 @@ export type CartItem = {
   quantity: number;
   createdAt: string;
   updatedAt: string;
-  product: Pick<Product, "id" | "name" | "price" | "productImages">;
+  product: Pick<
+    Product,
+    "id" | "name" | "price" | "productImages" | "category"
+  >;
 };
 
 export type TopUp = {
@@ -67,7 +70,7 @@ export type TopUp = {
   > & {
     paymentTerm: Pick<PaymentTerm, "id" | "name">;
   };
-  user: Pick<User, | "name">;
+  user: Pick<User, "name">;
   admin?: "string";
 };
 

@@ -40,3 +40,10 @@ export type TopUpDTO = {
   paymentTermId: string;
   paymentAccountId: string;
 };
+
+export type TransactionDTO = {
+  receiverName: string;
+  receiverPhoneNumber: string;
+  receiverAddress: string;
+  total: number;
+};
