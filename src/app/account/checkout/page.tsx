@@ -1,8 +1,17 @@
+"use server";
+
+import { listCartItems } from "@/actions/cart/list-cart";
 import { OrderSummary } from "@/components/checkout/checkout";
 import { UserContact } from "@/components/checkout/user-contact";
 import { CheckoutProvider } from "@/components/providers/checkout-provider";
+import { redirect } from "next/navigation";
 
 const CheckoutPage = async () => {
+  const { data } = await listCartItems();
+
+  if (!data || data.length === 0) {
+    redirect("/");
+  }
   return (
     <CheckoutProvider>
       <div className="w-full min-h-screen flex items-center justify-center p-4">

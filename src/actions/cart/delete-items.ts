@@ -3,24 +3,17 @@
 import { constructEndpoint } from "@/lib/api";
 import { cookies } from "next/headers";
 
-export const deleteCartItem = async ({
-  cartItemId,
-}: {
-  cartItemId: string;
-}) => {
+export const deleteCartItems = async () => {
   try {
-    const fetchResponse = await fetch(
-      constructEndpoint(`/cart/${cartItemId}`),
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${
-            (await cookies()).get("AUTH_TOKEN")?.value || ""
-          }`,
-        },
+    const fetchResponse = await fetch(constructEndpoint(`/cart/many`), {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${
+          (await cookies()).get("AUTH_TOKEN")?.value || ""
+        }`,
       },
-    );
+    });
     const response = await fetchResponse.json();
     if (!fetchResponse.ok) {
       return {

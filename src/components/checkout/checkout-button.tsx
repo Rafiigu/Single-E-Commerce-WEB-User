@@ -4,7 +4,8 @@ import { createTransaction } from "@/actions/checkout/create";
 import { useCheckout } from "../providers/checkout-provider";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
-import { useTransition } from "react";
+import { useRouter } from "next/navigation";
+import { deleteCartItems } from "@/actions/cart/delete-items";
 
 type CheckoutButtonProps = {
   total: number;
@@ -12,9 +13,9 @@ type CheckoutButtonProps = {
 
 export const CheckoutButton = ({ total }: CheckoutButtonProps) => {
   const { checkout } = useCheckout();
-  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     if (
       !checkout.receiverName ||
       !checkout.receiverPhoneNumber ||
@@ -24,26 +25,26 @@ export const CheckoutButton = ({ total }: CheckoutButtonProps) => {
       return;
     }
 
-    startTransition(async () => {
-      const result = await createTransaction({
-        data: {
-          receiverName: checkout.receiverName,
-          receiverPhoneNumber: checkout.receiverPhoneNumber,
-          receiverAddress: checkout.receiverAddress,
-          total: total,
-        },
-      });
-      if (result.error) {
-        toast.error(result.error);
-        return;
-      }
-      toast.success("Transaksi berhasil dibuat");
+    const result = await createTransaction({
+      data: {
+        receiverName: checkout.receiverName,
+        receiverPhoneNumber: checkout.receiverPhoneNumber,
+        receiverAddress: checkout.receiverAddress,
+        total: total,
+      },
     });
+    if (result.error) {
+      toast.error(result.error);
+      return;
+    }
+    toast.success("Transaksi berhasil dibuat");
+    await deleteCartItems();
+    router.push("/");
   };
 
   return (
-    <Button className="w-full" onClick={handleCheckout} disabled={isPending}>
-      {isPending ? "Processing..." : "Checkout"}
+    <Button className="w-full" onClick={handleCheckout}>
+      Checkout
     </Button>
   );
 };

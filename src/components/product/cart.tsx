@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ShoppingCart } from "lucide-react";
 import { useCart } from "../providers/cart-provider";
 import {
@@ -11,6 +12,7 @@ import { useEffect, useState } from "react";
 import { listCartItems } from "@/actions/cart/list-cart";
 import { CartItem } from "@/types";
 import { CartItemCard } from "./cart-item";
+import { Button } from "../ui/button";
 
 export const Cart = () => {
   const { count, cart } = useCart();
@@ -27,11 +29,12 @@ export const Cart = () => {
     fetchAsync();
   }, [open, cart]);
 
+  const isCartEmpty = cartItems.length === 0;
   return (
     <div>
-      <Popover open={open} onOpenChange={setOpen}>
+      <Popover open={isCartEmpty ? false : open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <div className="cursor-pointer">
+          <div className={isCartEmpty ? undefined : "cursor-pointer"}>
             <ShoppingCart />
             {count > 0 && (
               <span className="absolute -top-3 -right-3 bg-red-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-xs">
@@ -45,6 +48,17 @@ export const Cart = () => {
             {cartItems.map((item) => (
               <CartItemCard key={item.id} cartItem={item} />
             ))}
+          </div>
+          <div
+            className={
+              cartItems.length <= 2
+                ? "absolute bottom-5 right-5"
+                : "flex justify-end mt-5"
+            }
+          >
+            <Link href="/account/checkout">
+              <Button className="min-w-[140px] px-5 py-2.5">Checkout</Button>
+            </Link>
           </div>
         </PopoverContent>
       </Popover>
